@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mustache</title>
+</head>
+
+<body>
+  <div id="container"></div>
+  <!-- 
+    /* -------------mustache 图【mustache】 */
+    // mustache底层重点做两个事情：
+    // 1、将模板字符串编译为tokens形式
+    // 2、将tokens结合数据，解析为dom字符串
+    // 模块化打包工具有：webpack(webpack-dev-server)、rollup、Parcel
+    // mustache官方使用rollup进行模块化打包，而我们今天使用webpack进行模块化打包，
+    // 这是因为webpack能让我们更方便的在浏览器中（而不是nodejs环境中）实时调试程序
+    // 生成库是 UMD 的，这意味着它可以同时在nodejs环境中使用，也可以在浏览器环境中使用。
+    // 实现 UMD ，只需要一个‘通用头’即可
+   -->
+  <!-- 
+     templateStr==>
+     Sanner 过{{}} words==>
+     parseTemplateToTokens 变为tokens【图1】==>
+     nestTokens 压栈,变为折叠的tokens数组 【图2】==>
+     结合data递归变为html
+   -->
+  <script src="/xuni/bundle.js"></script>
+  <script>
+    var templateStr = `
+      <div>
+        <ol>
+          {{#students}}
+          <li class="box">
+            学生{{name1}}的爱好是
+            <ol>
+              {{#hobbies}}
+              <li>{{.}}</li>
+              {{/hobbies}}
+            </ol>
+          </li>
+          {{/students}}
+        </ol>
+      </div>
+    `;
+    var templateStr2 = `{{a}}`; 
+    var data = {
+      students:[
+        {name1:'小明',hobbies:['游泳','健身']},
+        {name1:'小红',hobbies:['足球2','健身2']},
+        {name1:'小强',hobbies:['吃饭','呵呵11']}
+      ],
+      // a:{
+      //   b:{
+      //     c:'hhh'
+      //   }
+      // }
+    }
+    var domStr = window.SSG_TemplateEngine.render(templateStr, data);
+    var container = document.getElementById('container');
+    console.log(domStr);
+    console.log(container);
+    container.innerHTML = domStr;
+  </script>
+</body>
+
+</html>

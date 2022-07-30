@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>递归</title>
+</head>
+
+<body>
+  <script>
+    /* 
+      斐波那契数列 1、1、2、3、5、8、13、21
+    */
+    //  创建一个函数，功能是返回下标为n的这项的数字
+
+    // 重复【图 递归斐波那契数列-重复计算】
+    // 缓存对象
+    var cache = {}
+
+    function fib(n) {
+      console.count('计数');
+      console.log(n)
+      // 判断缓存对象中有没有这个值，如果有，直接用
+      // n in cache  通过原型链查找,可以找到该属性
+      if (cache.hasOwnProperty(n)) {
+        return cache[n]
+      }
+      // 缓存对象没有这个值
+      // 看下标n是不是0或者是不是1，如果是，就直接返回常数1
+      // 如果不是，就递归
+      var res = n == 0 || n == 1 ? 1 : fib(n - 1) + fib(n - 2);
+      // 写入缓存
+      cache[n] = res;
+      return res
+    }
+    console.log(fib(10))
+    console.log(fib(9))
+
+    // 斐波那契数列 实现简单版本
+    let arr = [1, 1]
+    while (arr.length <= 10) {
+      arr.push(arr[arr.length - 1] + arr[arr.length - 2])
+    }
+    console.log(arr)
+  </script>
+</body>
+
+</html>

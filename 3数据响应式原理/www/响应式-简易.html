@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>响应式-简易</title>
+</head>
+
+<body>
+  <script>
+    let data = {
+      a: '1',
+      age: 18,
+      b: {
+        c: 'hh'
+      },
+      colors: ['x', 'y']
+    }
+
+
+    const oldArrayProto = Array.prototype;
+    let newArrProto = Object.create(oldArrayProto);
+    console.log(newArrProto);
+    ['push', 'pop', 'unshift', 'shift', 'splice'].forEach(methodName => {
+      newArrProto[methodName] = function () {
+        oldArrayProto[methodName].call(this, ...arguments)
+      }
+    })
+    // 变成响应式数据
+    Observer(data);
+
+    function Observer(target) {
+      if (typeof target !== 'object' || target === null) return target;
+      if (Array.isArray(target)) {
+        // target.__proto__ = newArrProto
+        Object.setPrototypeOf(target, newArrProto)
+      }
+      for (let key in target) {
+        defineReactive(target, key, target[key])
+      }
+    }
+
+    function defineReactive(target, key, value) {
+      // 深度监听
+      Observer(value);
+      Object.defineProperty(target, key, {
+        get() {
+          return value;
+        },
+        // 数据劫持
+        set(newValue) {
+          Observer(newValue);
+          if (value !== newValue) {
+            value = newValue;
+            console.log('更新视图')
+          }
+        }
+      })
+    }
+    data.colors.push('999')
+  </script>
+</body>
+
+</html>

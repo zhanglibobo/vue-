@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>指针算法</title>
+</head>
+
+<body>
+  <!-- 
+    抽象语法树是什么？ 【图1 ast抽象语法树】
+    模板语法=》抽象语法树ast(通过抽象语法树进行过度，让编译工作变得简单)=>正常的html语法
+
+    抽象语法树和虚拟节点的关系？   （虚拟节点和diff算法） 【图2 抽象语法树和虚拟节点的关系】
+    模板语法=》抽象语法ast=》     渲染函数（h函数）=》虚拟节点=》界面
+
+     算法
+     ast形成算法
+     手写ast编译器
+     手写文本解析功能
+     ast优化
+     将ast生成h()函数
+   -->
+  <script>
+    /*  
+       1.寻找字符串中，连续重复次数最多的字符  【图 1算法】
+       aaabbbbbbbcccdddd
+       ij
+       指针就是下标，js中的指针就是一个下标位置
+       i:0
+       j:0
+       如果i和j指向的字一样，那么i不动，j后移
+       如果i和j指向的字不一样，此时说明他们之间的字都是连续相同的，让i追上j，j后移
+    */
+    var str = 'aaabbbbbbbcccdddd';
+    //  指针
+    var i = 0;
+    var j = 0;
+    var maxReapeatCount = 0; //重复次数
+    var maxReapeatChar = ''; //重复字符
+    // 当i还在范围内的时候，应该继续寻找
+    while (i <= str.length - 1) {
+      if (str[i] != str[j]) {
+        console.log(i + '和' + j + '之间的文字连续相同', str[i], (j - i) + '次')
+        // 和当前重复次数最多的进行比较
+        if (j - i > maxReapeatCount) {
+          maxReapeatCount = j - i;
+          maxReapeatChar = str[i]
+        }
+        i = j
+      }
+      j++;
+    }
+    console.log(maxReapeatCount, maxReapeatChar);
+  </script>
+</body>
+
+</html>

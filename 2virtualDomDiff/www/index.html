@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>virtualDom和diff</title>
+</head>
+
+<body>
+  <!-- diff为了最小量更新 -->
+  <!-- 
+    snabbdom 简介
+    snabbdom 的h函数如何工作
+    diff 算法原理
+    手写 diff 算法
+   -->
+  <!-- 
+      1.虚拟dom如何被渲染函数（h函数）产生？  手写h函数
+      2.diff算法原理    手写diff算法
+      3.虚拟dom如何通过diff变为真正的dom的   事实上，虚拟dom变为真正的dom 是涵盖在diff算法里面的
+    -->
+  <!-- 
+     模板字符串
+     对象 [h(),h(),h()] 返回vnode
+     h函数返回了虚拟节点 虚拟节点的集合就是虚拟dom【图2】 （diff发生在虚拟dom上的）【图3】
+     patch函数让虚拟节点上树 真正的dom (html)
+    -->
+  <div id="btn">按钮</div>
+  <div id="container"></div>
+  <script>
+
+  </script>
+  <script src="/xuni/bundle.js"></script>
+</body>
+
+</html>

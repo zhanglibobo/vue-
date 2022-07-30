@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>递归</title>
+</head>
+
+<body>
+  <script>
+    /* 
+      试将高维数组 [1,2,[3,[4,5],6]]变为下对象
+      [技巧] 出现可‘规则复现’ 就要想到递归
+    */
+    // let obj = {
+    //   children: [
+    //   { value: 1 }, 
+    //   { value: 2 },
+    //   {
+    //     children:[
+    //     { value: 3 },
+    //     {
+    //       children: [
+    //        { value:4},
+    //        { value:5}
+    //        ]
+    //     },
+    //     { value: 6 }
+    //     ]
+    //   }
+    // ]
+    // }
+    // 测试数组
+    var arr = [1, 2, 3, [4, 5]];
+    // 转换函数
+    function convert(arr) {
+      // 准备一个结果数组
+      var result = [];
+      // 遍历每一项
+      for (var i = 0; i < arr.length; i++) {
+        // 如果遍历到的是number，直接放入
+        if (typeof arr[i] === 'number') {
+          result.push({
+            value: arr[i]
+          })
+        } else if (Array.isArray(arr[i])) {
+          // 如果遍历到的这项是数组，那么就递归
+          result.push({
+            children: convert(arr[i])
+          })
+        }
+      }
+      return result
+    }
+
+    function convert(item) {
+      if (typeof item === 'number') {
+        return {
+          value: item
+        }
+      } else if (Array.isArray(item)) {
+        // 传入的是数组
+        return {
+          children: item.map(i => convert(i))
+        }
+      }
+    }
+    // 转换函数二 ： 参数不是arr 而是item，意味着现在item可能是数组，也可能是数字
+    // function 
+    var o = convert(arr);
+    console.log(o)
+  </script>
+</body>
+
+</html>

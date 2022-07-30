@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Object.defineProperty() 数据劫持/数据代理</title>
+</head>
+
+<body>
+  <!-- 
+    model view-model view
+    vue没有调用其他api  this.a++ 是非侵入式
+
+    用到数据的地方，称为依赖
+    vue2.x 是中等粒度依赖 ， 用到数据的组件是依赖
+    在getter中收集依赖，在setter中触发依赖
+
+    dep类 和 watcher 类   图【dep和watcher类】【dep和watcher类2】
+    把依赖收集的代码封装成一个dep类，它专门用来管理依赖，每个Observer的实例，成员都有一个dep的实例
+    watcher是一个中介，数据发生变化啊时，通过watcher中转，通知组件 
+
+    1、依赖就是watcher。只有watcher触发的getter才会收集依赖，哪个watcher触发了getter，就把哪个watcher收集到dep中
+    2、dep是发布订阅模式，当数据发生变化时，会循环依赖列表，把所有的watcher都通知一遍
+    3、代码实现的巧妙之处：watcher把自己设置到全局的一个指定位置，然后读取数据，因为读取了数据，所以会触发这个数据的getter
+    在getter中就能得到当前正在读取数据的watcher，并把这个watcher收集到dep中
+   -->
+  <script>
+
+  </script>
+  <script src="/xuni/bundle.js"></script>
+  <script>
+
+
+  </script>
+</body>
+
+</html>
